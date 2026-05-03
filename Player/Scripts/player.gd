@@ -1,5 +1,13 @@
 class_name Player extends CharacterBody2D
 
+signal move_started
+signal move_stopped
+signal dash_started
+signal dash_ended
+signal jump_started
+signal jump_landed
+signal state_changed(new_state : String)
+
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction : Vector2 = Vector2.ZERO
 var z_height : float = 0.0

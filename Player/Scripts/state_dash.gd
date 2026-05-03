@@ -13,12 +13,15 @@ var _dash_direction : Vector2 = Vector2.ZERO
 
 
 func Enter() -> void:
+	player.dash_started.emit()
+	player.state_changed.emit("dash")
 	_dash_direction = player.direction if player.direction != Vector2.ZERO else Vector2(player.cardinal_direction.x, player.cardinal_direction.y).normalized()
 	_timer = 0.0
 	player.UpdateAnimation("walk")
 
 
 func Exit() -> void:
+	player.dash_ended.emit()
 	_cooldown = dash_cooldown
 
 
