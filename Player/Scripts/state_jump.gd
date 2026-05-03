@@ -13,7 +13,8 @@ func Enter() -> void:
 	player.jump_started.emit()
 	player.state_changed.emit("jump")
 	_t = 0.0
-	player.sprite.scale.y = 0.7
+	player.sprite.scale.x = sign(player.sprite.scale.x) * 1.2
+	player.sprite.scale.y = 0.65
 	player.UpdateAnimation("walk")
 
 
@@ -21,7 +22,7 @@ func Exit() -> void:
 	player.jump_landed.emit()
 	player.z_height = 0.0
 	player.sprite.position.y = 0.0
-	player.sprite.scale.y = 1.0
+	player.sprite.scale = Vector2(sign(player.sprite.scale.x), 1.0)
 	player.shadow.scale = Vector2.ONE
 
 
@@ -34,7 +35,9 @@ func Process( _delta : float ) -> State:
 
 	player.z_height = jump_height * 4.0 * _t * (1.0 - _t)
 	player.sprite.position.y = -player.z_height
-	player.sprite.scale.y = 1.0 + 0.3 * sin(PI * _t)
+	var squash_stretch : float = sin(PI * _t)
+	player.sprite.scale.x = sign(player.sprite.scale.x) * (1.2 - 0.35 * squash_stretch)
+	player.sprite.scale.y = 0.65 + 0.7 * squash_stretch
 	var shadow_scale : float = 1.0 - (player.z_height / jump_height) * 0.4
 	player.shadow.scale = Vector2(shadow_scale, shadow_scale)
 

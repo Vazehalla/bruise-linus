@@ -19,8 +19,8 @@ func Enter() -> void:
 	_dash_direction = player.direction if player.direction != Vector2.ZERO else Vector2(player.cardinal_direction.x, player.cardinal_direction.y).normalized()
 	_timer = 0.0
 	_flip = sign(player.sprite.scale.x)
-	player.sprite.scale = Vector2(_flip * 1.35, 0.8)
-	player.sprite.rotation = _dash_direction.x * deg_to_rad(20.0)
+	player.sprite.scale = Vector2(_flip * 1.6, 0.7)
+	player.sprite.rotation = _dash_direction.x * deg_to_rad(28.0)
 	player.UpdateAnimation("walk")
 
 
@@ -35,8 +35,9 @@ func Process( _delta : float ) -> State:
 	_cooldown = max(0.0, _cooldown - _delta)
 	_timer += _delta
 	var progress : float = min(_timer / dash_duration, 1.0)
-	player.sprite.scale.x = _flip * lerp(1.35, 1.0, progress)
-	player.sprite.scale.y = lerp(0.8, 1.0, progress)
+	player.sprite.scale.x = _flip * lerp(1.6, 1.0, progress)
+	player.sprite.scale.y = lerp(0.7, 1.0, progress)
+	player.sprite.rotation = _dash_direction.x * deg_to_rad(28.0 * (1.0 - progress))
 	player.velocity = _dash_direction * dash_speed
 	if _timer >= dash_duration:
 		if player.direction != Vector2.ZERO:

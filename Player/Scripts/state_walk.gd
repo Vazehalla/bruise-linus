@@ -30,8 +30,12 @@ func Process( _delta: float ) -> State:
 	if player.SetDirection():
 		player.UpdateAnimation("walk")
 	
-	if player.direction.x != 0.0 and player.direction.y != 0.0:
-		player.sprite.rotation = deg_to_rad(12.0 * sign(player.direction.x))
+	# Always lean slightly when strafing; stronger lean on diagonals.
+	if player.direction.x != 0.0:
+		var lean_degrees : float = 10.0
+		if player.direction.y != 0.0:
+			lean_degrees = 18.0
+		player.sprite.rotation = deg_to_rad(lean_degrees * sign(player.direction.x))
 	else:
 		player.sprite.rotation = 0.0
 	
