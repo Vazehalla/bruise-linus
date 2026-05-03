@@ -13,6 +13,7 @@ var attacking : bool = false
 @onready var dash: State_Dash = $"../Dash"
 
 func Enter() -> void:
+	player.state_changed.emit("attack")
 	player.UpdateAnimation("attack")
 	animation_attack.play( "attack_" + player.AnimDirection() )
 	animation_player.animation_finished.connect( EndAttack )

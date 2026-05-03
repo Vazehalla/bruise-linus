@@ -16,6 +16,7 @@ var _t : float = 0.0
 
 func Enter() -> void:
 	player.jump_started.emit()
+	player.move_started.emit()
 	player.state_changed.emit("jump")
 	_t = 0.0
 	player.sprite.scale.x = player.FacingSign() * jump_start_scale_x
