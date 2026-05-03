@@ -70,11 +70,11 @@ The system must:
 
 Required states:
 
-- idle
-- move
-- dash
-- jump
-- locked
+- idle (implemented)
+- move (implemented)
+- dash (implemented)
+- jump (implemented)
+- locked (planned: used for ability use, hit-stun, and cutscene lock)
 
 State machine responsibilities:
 
@@ -132,9 +132,10 @@ Movement is acceptable when:
 
 ## 10. Iteration Plan
 
-1. Finalize state rules and tunables.
-2. Implement movement baseline (idle and move).
-3. Add dash slice and test.
-4. Add jump slice and test.
-5. Connect feedback hooks.
-6. Run short tuning passes with small value changes only.
+1. Finalize state rules and tunables. (done)
+2. Implement movement baseline (idle and move). (done)
+3. Add dash slice and test. (done)
+4. Add jump slice and test. (done)
+5. Connect feedback hooks. (done)
+6. Run short tuning passes with small value changes only. (done)
+7. Add locked state for ability use and hit-stun. (next)
