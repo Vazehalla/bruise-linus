@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Parses all staged GDScript files before each commit.
+# Requires gdtoolkit: pip install "gdtoolkit==4.*"
+
+set -euo pipefail
+
+if ! command -v gdparse &>/dev/null; then
+    echo "[pre-commit] WARNING: gdparse not found. Skipping GDScript validation."
+    echo "            Run: pip install \"gdtoolkit==4.*\""
+    exit 0
+fi
+
+# Collect staged .gd files
+staged=$(git diff --cached --name-only --diff-filter=ACM | grep '\.gd$' || true)
+
+if [[ -z "$staged" ]]; then
+    exit 0
+fi
+
+echo "[pre-commit] Validating staged GDScript files..."
+
+failed=0
+while IFS= read -r file; do
+    if ! output=$(gdparse "$file" 2>&1); then
+        echo "  FAIL: $file"
+        echo "$output" | sed 's/^/    /'
+        failed=1
+    else
+        echo "  OK:   $file"
+    fi
+done <<< "$staged"
+
+if [[ $failed -ne 0 ]]; then
+    echo ""
+    echo "[pre-commit] Parse errors found. Commit blocked."
+    exit 1
+fi
+
+echo "[pre-commit] All scripts OK."
+exit 0
