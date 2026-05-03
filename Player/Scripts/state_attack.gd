@@ -10,6 +10,7 @@ var attacking : bool = false
 @onready var audio: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
 @onready var idle: State_Idle = $"../Idle"
 @onready var walk: State_Walk = $"../Walk"
+@onready var dash: State_Dash = $"../Dash"
 
 func Enter() -> void:
 	player.UpdateAnimation("attack")
@@ -36,6 +37,8 @@ func Physics( _delta : float) -> State:
 	return null
 
 func HandleInput( _event : InputEvent ) -> State:
+	if _event.is_action_pressed("dash") and dash.is_ready():
+		return dash
 	return null
 
 
