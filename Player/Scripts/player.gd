@@ -2,10 +2,12 @@ class_name Player extends CharacterBody2D
 
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction : Vector2 = Vector2.ZERO
+var z_height : float = 0.0
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var state_machine: PlayerStateMachine = $StateMachine
+@onready var sprite : Sprite2D = $Sprite2D
+@onready var shadow : Sprite2D = $Sprite2D/ShadowSprite
+@onready var state_machine : PlayerStateMachine = $StateMachine
 
 
 

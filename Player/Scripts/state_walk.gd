@@ -5,6 +5,7 @@ class_name State_Walk extends State
 @onready var idle : State = $"../Idle"
 @onready var attack : State_Attack = $"../Attack"
 @onready var dash : State_Dash = $"../Dash"
+@onready var jump : State_Jump = $"../Jump"
 
 
 # What happens when the player enters this State?
@@ -38,4 +39,6 @@ func HandleInput( _event : InputEvent ) -> State:
 		return attack
 	if _event.is_action_pressed("dash") and dash.is_ready():
 		return dash
+	if _event.is_action_pressed("jump"):
+		return jump
 	return null
