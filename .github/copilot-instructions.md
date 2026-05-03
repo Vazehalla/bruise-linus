@@ -40,9 +40,30 @@
 ## Safe Change Process
 
 1. Read impacted scripts in `Player/Scripts` first.
-2. Add or modify the smallest possible state logic.
-3. Re-check transitions and forbidden transitions.
-4. Surface assumptions when engine/editor validation cannot be run here.
+2. Run a behavior spec pass before writing code:
+  - state the smallest intended behavior change
+  - list what must happen and what must not happen
+  - list the validation scenarios that will prove the change
+3. Run a pre-coding quality gate before writing code:
+  - list the smallest viable change
+  - list complexity risks and how to avoid them
+  - confirm state responsibilities stay narrow
+4. Add or modify the smallest possible state logic.
+5. Re-check transitions and forbidden transitions.
+6. Surface assumptions when engine/editor validation cannot be run here.
+
+## Behavior Spec Gate
+
+- Treat `behavior-spec` as the first skill for gameplay and movement code tasks.
+- Use it to define expected behavior and regression boundaries before implementation.
+- Hand off from `behavior-spec` to `code-quality-guard` before writing code.
+
+## Code Quality Gate
+
+- Treat `code-quality-guard` as a default skill for code tasks.
+- Use it after `behavior-spec` and again before commit/review.
+- Avoid introducing helpers unless they reduce real duplication or branching.
+- Prefer local, explicit code over clever abstractions.
 
 ## Documentation Rule
 

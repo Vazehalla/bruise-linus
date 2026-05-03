@@ -10,6 +10,24 @@ applyTo: "Player/Scripts/**/*.gd"
 - Keep `Player` as shared data holder and animation helper.
 - Route transitions through `PlayerStateMachine.ChangeState` semantics (return state or `null`).
 
+## Behavior Spec Gate (Required)
+
+- Before editing movement code, define:
+  1. the smallest intended behavior change
+  2. the allowed behavior after the change
+  3. forbidden behavior or regressions
+  4. concrete validation scenarios
+- Use the `behavior-spec` skill first on movement tasks.
+
+## Pre-Coding Quality Gate (Required)
+
+- Before editing code, run a short preflight:
+  1. define the smallest intended behavior change
+  2. list likely complexity risks (branching, duplication, mixed concerns)
+  3. decide where logic should live so each state keeps one intent
+- Use the `code-quality-guard` skill after `behavior-spec` for this preflight on movement tasks.
+- If a requested change needs wider refactor, split into iterative slices instead of one broad patch.
+
 ## State Design Rules
 
 - One state should represent one gameplay intent.
