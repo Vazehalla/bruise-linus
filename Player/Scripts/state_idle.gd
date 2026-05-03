@@ -9,6 +9,8 @@ class_name State_Idle extends State
 func Enter() -> void:
 	player.move_stopped.emit()
 	player.state_changed.emit("idle")
+	player.sprite.rotation = 0.0
+	player.sprite.scale.y = 1.0
 	player.UpdateAnimation("idle")
 
 # What happens when the player exits this State?

@@ -12,11 +12,13 @@ class_name State_Walk extends State
 func Enter() -> void:
 	player.move_started.emit()
 	player.state_changed.emit("walk")
+	player.sprite.rotation = 0.0
+	player.sprite.scale.y = 1.0
 	player.UpdateAnimation("walk")
 
 # What happens when the player exits this State?
 func Exit() -> void:
-	pass
+	player.sprite.rotation = 0.0
 
 # What happenns during the _process update in this State?
 func Process( _delta: float ) -> State:
@@ -27,6 +29,11 @@ func Process( _delta: float ) -> State:
 	
 	if player.SetDirection():
 		player.UpdateAnimation("walk")
+	
+	if player.direction.x != 0.0 and player.direction.y != 0.0:
+		player.sprite.rotation = deg_to_rad(12.0 * sign(player.direction.x))
+	else:
+		player.sprite.rotation = 0.0
 	
 	return null
 
