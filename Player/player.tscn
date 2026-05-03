@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://7rksxinscnwf"]
 
 [ext_resource type="Texture2D" uid="uid://q36ctoajl6r0" path="res://Player/Sprites/PlayerSprite02.png" id="1_gwnis"]
+[ext_resource type="Script" uid="uid://cxm6h76q3p4su" path="res://Player/Scripts/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://bmhrj8our3fmm" path="res://Player/Scripts/player_state_machine.gd" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://dofpsdbm3xi38" path="res://Player/Sprites/AttackSprite01 (1).png" id="2_fhl08"]
 [ext_resource type="Script" uid="uid://cd1jifka3dqlq" path="res://Player/Scripts/state_idle.gd" id="3_btcbx"]
@@ -423,6 +424,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=155078557]
+script = ExtResource("1_player")
 collision_mask = 16
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
