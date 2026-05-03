@@ -47,16 +47,24 @@ func SetDirection() -> bool:
 	if direction == Vector2.ZERO:
 		return false
 	
-	
-	if direction.y == 0:
-		new_direction = Vector2.LEFT if direction.x < 0 else Vector2.RIGHT
-	elif direction.x == 0:
-		new_direction = Vector2.UP if direction.y < 0 else Vector2.DOWN
+	# Use vertical priority for diagonals so W+A/W+D map to up and S+A/S+D map to down.
+	if direction.y != 0.0:
+		new_direction = Vector2.UP if direction.y < 0.0 else Vector2.DOWN
+	else:
+		new_direction = Vector2.LEFT if direction.x < 0.0 else Vector2.RIGHT
+
+	# Horizontal facing should follow current horizontal input when available.
+	if direction.x != 0.0:
+		sprite.scale.x = -1.0 if direction.x < 0.0 else 1.0
+	elif cardinal_direction == Vector2.LEFT:
+		sprite.scale.x = -1.0
+	elif cardinal_direction == Vector2.RIGHT:
+		sprite.scale.x = 1.0
+
 	if new_direction == cardinal_direction:
 		return false
-	
+
 	cardinal_direction = new_direction
-	sprite.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
 	return true
 
 
