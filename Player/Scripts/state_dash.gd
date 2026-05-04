@@ -14,11 +14,13 @@ var _flip : float = 1.0
 
 @onready var idle : State_Idle = $"../Idle"
 @onready var walk : State_Walk = $"../Walk"
+@onready var dash_effect : Sprite2D = $"../../Sprite2D/DashEffectSprite"
 
 func Enter() -> void:
 	player.dash_started.emit()
 	player.state_changed.emit("dash")
 	player.is_invincible = true
+	dash_effect.visible = true
 	var fallback := Vector2(player.cardinal_direction.x, player.cardinal_direction.y).normalized()
 	_dash_direction = player.direction if player.direction != Vector2.ZERO else fallback
 	_timer = 0.0
@@ -30,6 +32,7 @@ func Enter() -> void:
 func Exit() -> void:
 	player.dash_ended.emit()
 	player.is_invincible = false
+	dash_effect.visible = false
 	player.sprite.scale = Vector2(_flip, 1.0)
 	player.sprite.rotation = 0.0
 	_cooldown_until = Time.get_ticks_msec() / 1000.0 + dash_cooldown
