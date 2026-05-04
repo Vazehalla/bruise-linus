@@ -11,6 +11,9 @@ var attacking : bool = false
 @onready var idle: State_Idle = $"../Idle"
 @onready var walk: State_Walk = $"../Walk"
 @onready var dash: State_Dash = $"../Dash"
+@onready var hurt_box: HurtBox = $"../../Interactions/HurtBox"
+
+
 
 func Enter() -> void:
 	player.state_changed.emit("attack")
@@ -21,10 +24,16 @@ func Enter() -> void:
 	audio.pitch_scale = randf_range( 0.9, 1.1 )
 	audio.play()
 	attacking = true
+	
+	
+	await get_tree().create_timer( 0.01 ).timeout
+	hurt_box.monitoring = true
+	pass
 
 func Exit() -> void:
 	animation_player.animation_finished.disconnect( EndAttack )
 	attacking = false
+	hurt_box.monitoring = false
 
 func Process( _delta: float ) -> State:
 	player.velocity -= player.velocity * decelerate_speed * _delta
