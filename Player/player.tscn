@@ -11,13 +11,10 @@
 [ext_resource type="Script" uid="uid://be2rrc8cn5hxm" path="res://Player/Scripts/state_dash.gd" id="6_dash"]
 [ext_resource type="Script" uid="uid://cjifxf5ofrc2g" path="res://Player/Scripts/state_jump.gd" id="7_jump"]
 [ext_resource type="AudioStream" uid="uid://b0a7nxiqny1b1" path="res://Player/Audio/SwordSwoosh.wav" id="7_vtle1"]
-<<<<<<< HEAD
 [ext_resource type="Script" path="res://Player/Scripts/camera_controller.gd" id="8_camera"]
 [ext_resource type="Texture2D" uid="uid://c3fpst5w4dtup" path="res://Player/Sprites/void-dash-effect1-sheet.png" id="9_dash_fx"]
-=======
 [ext_resource type="PackedScene" uid="uid://c2t7fy26uvsti" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="12_5htga"]
 [ext_resource type="Script" uid="uid://c66bh431bdes5" path="res://Player/Scripts/player_interactions_host.gd" id="12_p5o4e"]
->>>>>>> main
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
 
