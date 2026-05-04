@@ -436,6 +436,11 @@ wall_min_slide_angle = 0.17453292
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1296691259]
 shape = SubResource("CircleShape2D_l8h54")
 
+[node name="DashEffectSprite" type="Sprite2D" parent="." unique_id=1003]
+visible = false
+texture = ExtResource("9_dash_fx")
+hframes = 4
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1601881532]
 position = Vector2(0, -20)
 texture = ExtResource("1_gwnis")
@@ -446,12 +451,6 @@ vframes = 3
 position = Vector2(0, 10)
 texture = ExtResource("2_fhl08")
 hframes = 12
-
-[node name="DashEffectSprite" type="Sprite2D" parent="." unique_id=1003]
-visible = false
-texture = ExtResource("9_dash_fx")
-hframes = 4
-z_index = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/AttackEffectSprite" unique_id=269660955]
 libraries/ = SubResource("AnimationLibrary_dkpta")
