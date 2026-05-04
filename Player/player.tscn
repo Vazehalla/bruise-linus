@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/state_dash.gd" id="6_dash"]
 [ext_resource type="Script" path="res://Player/Scripts/state_jump.gd" id="7_jump"]
 [ext_resource type="AudioStream" uid="uid://b0a7nxiqny1b1" path="res://Player/Audio/SwordSwoosh.wav" id="7_vtle1"]
+[ext_resource type="Script" path="res://Player/Scripts/camera_controller.gd" id="8_camera"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
 
@@ -478,6 +479,7 @@ script = ExtResource("6_dash")
 script = ExtResource("7_jump")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=804053381]
+script = ExtResource("8_camera")
 
 [node name="Audio" type="Node2D" parent="." unique_id=62314292]
 
