@@ -59,10 +59,18 @@ func set_target(player : Player) -> void:
 func _physics_process(delta : float) -> void:
 	if not _target:
 		return
-	_smooth_pos = _solve_deadzone(_target.global_position, delta)
+	_update_look_ahead(delta)
+	_smooth_pos = _solve_deadzone(_target.global_position + _look_ahead_offset, delta)
 	if world_bounds_enabled:
 		_smooth_pos = _apply_bounds(_smooth_pos)
 	global_position = _smooth_pos
+
+
+func _update_look_ahead(delta : float) -> void:
+	var target_offset : Vector2 = Vector2.ZERO
+	if _is_moving:
+		target_offset = _target.direction * look_ahead_distance
+	_look_ahead_offset = _look_ahead_offset.lerp(target_offset, look_ahead_recover_speed * delta)
 
 
 func _solve_deadzone(target_pos : Vector2, delta : float) -> Vector2:
@@ -103,11 +111,11 @@ func request_shake(_amplitude : float = -1.0, _duration : float = -1.0) -> void:
 
 
 func _on_move_started() -> void:
-	pass
+	_is_moving = true
 
 
 func _on_move_stopped() -> void:
-	pass
+	_is_moving = false
 
 
 func _on_dash_started() -> void:
