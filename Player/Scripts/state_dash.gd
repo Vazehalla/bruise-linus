@@ -7,8 +7,8 @@ class_name State_Dash extends State
 @export var dash_scale_y : float = 0.7
 @export var dash_tilt_degrees : float = 28.0
 @export var effect_offset : float = 18.0
-@export var effect_leg_anchor_y : float = 10.0
-@export var effect_side_y_adjust : float = -8.0
+@export var effect_anchor_y_ns : float = 1.0
+@export var effect_anchor_y_ew : float = -7.0
 
 var _timer : float = 0.0
 var _cooldown_until : float = 0.0
@@ -22,7 +22,7 @@ var _flip : float = 1.0
 
 func _effect_anchor_y() -> float:
 	var is_side : bool = absf(_dash_direction.x) > absf(_dash_direction.y)
-	return effect_leg_anchor_y + (effect_side_y_adjust if is_side else 0.0)
+	return effect_anchor_y_ew if is_side else effect_anchor_y_ns
 
 func Enter() -> void:
 	player.dash_started.emit()
