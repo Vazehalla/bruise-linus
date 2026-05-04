@@ -7,8 +7,8 @@ class_name CameraController extends Camera2D
 @export var deadzone_height : float = 10.0
 @export var look_ahead_distance : float = 14.0
 @export var look_ahead_recover_speed : float = 10.0
-@export var base_zoom : Vector2 = Vector2(2.5, 2.25)
-@export var colossus_zoom : Vector2 = Vector2(3.5, 3.15)
+@export var base_zoom : Vector2 = Vector2(4.0, 3.6)
+@export var colossus_zoom : Vector2 = Vector2(6.0, 5.4)
 @export var zoom_transition_speed : float = 3.5
 @export var shake_default_amplitude : float = 2.0
 @export var shake_default_duration : float = 0.10
