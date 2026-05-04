@@ -7,8 +7,8 @@ class_name CameraController extends Camera2D
 @export var deadzone_height : float = 10.0
 @export var look_ahead_distance : float = 14.0
 @export var look_ahead_recover_speed : float = 10.0
-@export var base_zoom : Vector2 = Vector2(0.860, 0.774)
-@export var colossus_zoom : Vector2 = Vector2(0.603, 0.543)
+@export var base_zoom : Vector2 = Vector2(1.0, 1.0)
+@export var colossus_zoom : Vector2 = Vector2(0.5, 0.5)
 @export var zoom_transition_speed : float = 3.5
 @export var shake_default_amplitude : float = 2.0
 @export var shake_default_duration : float = 0.10
@@ -31,7 +31,6 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	_zoom_target = base_zoom
-	zoom = base_zoom
 	var parent := get_parent()
 	if parent is Player:
 		set_target(parent as Player)
@@ -40,20 +39,18 @@ func _ready() -> void:
 func set_target(player : Player) -> void:
 	_target = player
 	_smooth_pos = player.global_position
-	if not player.move_started.is_connected(_on_move_started):
-		player.move_started.connect(_on_move_started)
-	if not player.move_stopped.is_connected(_on_move_stopped):
-		player.move_stopped.connect(_on_move_stopped)
-	if not player.dash_started.is_connected(_on_dash_started):
-		player.dash_started.connect(_on_dash_started)
-	if not player.dash_ended.is_connected(_on_dash_ended):
-		player.dash_ended.connect(_on_dash_ended)
-	if not player.jump_started.is_connected(_on_jump_started):
-		player.jump_started.connect(_on_jump_started)
-	if not player.jump_landed.is_connected(_on_jump_landed):
-		player.jump_landed.connect(_on_jump_landed)
-	if not player.state_changed.is_connected(_on_state_changed):
-		player.state_changed.connect(_on_state_changed)
+	_connect_once(player.move_started, _on_move_started)
+	_connect_once(player.move_stopped, _on_move_stopped)
+	_connect_once(player.dash_started, _on_dash_started)
+	_connect_once(player.dash_ended, _on_dash_ended)
+	_connect_once(player.jump_started, _on_jump_started)
+	_connect_once(player.jump_landed, _on_jump_landed)
+	_connect_once(player.state_changed, _on_state_changed)
+
+
+func _connect_once(sig : Signal, callable : Callable) -> void:
+	if not sig.is_connected(callable):
+		sig.connect(callable)
 
 
 func _physics_process(delta : float) -> void:
@@ -64,7 +61,7 @@ func _physics_process(delta : float) -> void:
 	if world_bounds_enabled:
 		_smooth_pos = _apply_bounds(_smooth_pos)
 	_update_shake(delta)
-	global_position = _smooth_pos + _shake_offset
+	global_position = (_smooth_pos + _shake_offset).round()
 	zoom = zoom.lerp(_zoom_target, zoom_transition_speed * delta)
 
 

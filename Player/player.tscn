@@ -496,7 +496,7 @@ script = ExtResource("6_dash")
 script = ExtResource("7_jump")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=804053381]
-zoom = Vector2(0.860, 0.774)
+zoom = Vector2(1.0, 1.0)
 script = ExtResource("8_camera")
 follow_speed_x = 12.0
 follow_speed_y = 12.0
@@ -504,8 +504,8 @@ deadzone_width = 16.0
 deadzone_height = 10.0
 look_ahead_distance = 14.0
 look_ahead_recover_speed = 10.0
-base_zoom = Vector2(0.860, 0.774)
-colossus_zoom = Vector2(0.603, 0.543)
+base_zoom = Vector2(1.0, 1.0)
+colossus_zoom = Vector2(0.5, 0.5)
 zoom_transition_speed = 3.5
 shake_default_amplitude = 2.0
 shake_default_duration = 0.1
