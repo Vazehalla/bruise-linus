@@ -65,6 +65,7 @@ func _physics_process(delta : float) -> void:
 		_smooth_pos = _apply_bounds(_smooth_pos)
 	_update_shake(delta)
 	global_position = _smooth_pos + _shake_offset
+	zoom = zoom.lerp(_zoom_target, zoom_transition_speed * delta)
 
 
 func _update_look_ahead(delta : float) -> void:
@@ -103,8 +104,8 @@ func _apply_bounds(pos : Vector2) -> Vector2:
 	)
 
 
-func set_colossus_mode(_active : bool) -> void:
-	pass
+func set_colossus_mode(active : bool) -> void:
+	_zoom_target = colossus_zoom if active else base_zoom
 
 
 func _update_shake(delta : float) -> void:
