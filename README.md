@@ -1,4 +1,4 @@
-# Git Cheat Sheet (Beginner)
+# Git Cheat Sheet
 
 ## Daily Workflow
 
