@@ -20,11 +20,12 @@ func Enter() -> void:
 	player.dash_started.emit()
 	player.state_changed.emit("dash")
 	player.is_invincible = true
-	dash_effect.visible = true
 	var fallback := Vector2(player.cardinal_direction.x, player.cardinal_direction.y).normalized()
 	_dash_direction = player.direction if player.direction != Vector2.ZERO else fallback
 	_timer = 0.0
 	_flip = player.FacingSign()
+	dash_effect.flip_h = _dash_direction.x >= 0.0
+	dash_effect.visible = true
 	player.sprite.scale = Vector2(_flip * dash_scale_x, dash_scale_y)
 	player.sprite.rotation = _dash_direction.x * deg_to_rad(dash_tilt_degrees)
 	player.UpdateAnimation("walk")
