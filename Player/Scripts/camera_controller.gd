@@ -63,7 +63,8 @@ func _physics_process(delta : float) -> void:
 	_smooth_pos = _solve_deadzone(_target.global_position + _look_ahead_offset, delta)
 	if world_bounds_enabled:
 		_smooth_pos = _apply_bounds(_smooth_pos)
-	global_position = _smooth_pos
+	_update_shake(delta)
+	global_position = _smooth_pos + _shake_offset
 
 
 func _update_look_ahead(delta : float) -> void:
@@ -106,8 +107,24 @@ func set_colossus_mode(_active : bool) -> void:
 	pass
 
 
-func request_shake(_amplitude : float = -1.0, _duration : float = -1.0) -> void:
-	pass
+func _update_shake(delta : float) -> void:
+	if _shake_time_left <= 0.0:
+		_shake_amplitude = 0.0
+		_shake_offset = Vector2.ZERO
+		return
+	_shake_time_left -= delta
+	_shake_amplitude = maxf(0.0, _shake_amplitude - shake_decay_rate * delta)
+	_shake_offset = Vector2(
+		_rng.randf_range(-_shake_amplitude, _shake_amplitude),
+		_rng.randf_range(-_shake_amplitude, _shake_amplitude)
+	)
+
+
+func request_shake(amplitude : float = -1.0, duration : float = -1.0) -> void:
+	var amp : float = shake_default_amplitude if amplitude < 0.0 else amplitude
+	var dur : float = shake_default_duration if duration < 0.0 else duration
+	_shake_amplitude = minf(_shake_amplitude + amp, max_shake_amplitude)
+	_shake_time_left = maxf(_shake_time_left, dur)
 
 
 func _on_move_started() -> void:
@@ -131,7 +148,7 @@ func _on_jump_started() -> void:
 
 
 func _on_jump_landed() -> void:
-	pass
+	request_shake()
 
 
 func _on_state_changed(_new_state : String) -> void:
