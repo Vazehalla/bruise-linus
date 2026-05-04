@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/state_jump.gd" id="7_jump"]
 [ext_resource type="AudioStream" uid="uid://b0a7nxiqny1b1" path="res://Player/Audio/SwordSwoosh.wav" id="7_vtle1"]
 [ext_resource type="Script" path="res://Player/Scripts/camera_controller.gd" id="8_camera"]
-[ext_resource type="Texture2D" uid="uid://ccftr4xurqck8" path="res://Player/Sprites/dash_effect_arcane_v2.png" id="9_dash_fx"]
+[ext_resource type="Texture2D" uid="uid://c3fpst5w4dtup" path="res://Player/Sprites/void-dash-effect1-sheet.png" id="9_dash_fx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
 
