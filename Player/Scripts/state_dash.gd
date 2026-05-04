@@ -44,6 +44,7 @@ func Process( _delta : float ) -> State:
 	player.sprite.scale.y = lerp(dash_scale_y, 1.0, progress)
 	player.sprite.rotation = _dash_direction.x * deg_to_rad(dash_tilt_degrees * (1.0 - progress))
 	player.velocity = _dash_direction * dash_speed
+	dash_effect.frame = mini(int(progress * 4), 3)
 	if _timer >= dash_duration:
 		if player.direction != Vector2.ZERO:
 			return walk
