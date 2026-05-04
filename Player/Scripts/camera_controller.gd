@@ -1,19 +1,19 @@
 class_name CameraController extends Camera2D
 
 # -- Tunables --
-@export var follow_speed_x : float = 10.0
-@export var follow_speed_y : float = 10.0
-@export var deadzone_width : float = 32.0
-@export var deadzone_height : float = 20.0
-@export var look_ahead_distance : float = 18.0
-@export var look_ahead_recover_speed : float = 8.0
+@export var follow_speed_x : float = 12.0
+@export var follow_speed_y : float = 12.0
+@export var deadzone_width : float = 16.0
+@export var deadzone_height : float = 10.0
+@export var look_ahead_distance : float = 14.0
+@export var look_ahead_recover_speed : float = 10.0
 @export var base_zoom : Vector2 = Vector2(1.0, 1.0)
 @export var colossus_zoom : Vector2 = Vector2(0.85, 0.85)
 @export var zoom_transition_speed : float = 3.5
 @export var shake_default_amplitude : float = 2.0
-@export var shake_default_duration : float = 0.08
-@export var shake_decay_rate : float = 20.0
-@export var max_shake_amplitude : float = 5.0
+@export var shake_default_duration : float = 0.10
+@export var shake_decay_rate : float = 25.0
+@export var max_shake_amplitude : float = 4.0
 @export var world_bounds_enabled : bool = false
 @export var world_bounds : Rect2 = Rect2(-512.0, -512.0, 1024.0, 1024.0)
 
