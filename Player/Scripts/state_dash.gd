@@ -7,7 +7,7 @@ class_name State_Dash extends State
 @export var dash_scale_y : float = 0.7
 @export var dash_tilt_degrees : float = 28.0
 @export var effect_offset : float = 18.0
-@export var effect_leg_anchor_y : float = 0.0
+@export var effect_leg_anchor_y : float = 10.0
 
 var _timer : float = 0.0
 var _cooldown_until : float = 0.0
