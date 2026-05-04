@@ -12,6 +12,7 @@ var cardinal_direction : Vector2 = Vector2.DOWN
 var move_octant : Vector2 = Vector2.DOWN
 var direction : Vector2 = Vector2.ZERO
 var z_height : float = 0.0
+var is_invincible : bool = false
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
