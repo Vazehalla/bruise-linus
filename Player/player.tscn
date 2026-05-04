@@ -447,10 +447,11 @@ position = Vector2(0, 10)
 texture = ExtResource("2_fhl08")
 hframes = 12
 
-[node name="DashEffectSprite" type="Sprite2D" parent="Sprite2D" unique_id=1003]
+[node name="DashEffectSprite" type="Sprite2D" parent="." unique_id=1003]
 visible = false
 texture = ExtResource("9_dash_fx")
 hframes = 4
+z_index = -1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/AttackEffectSprite" unique_id=269660955]
 libraries/ = SubResource("AnimationLibrary_dkpta")
