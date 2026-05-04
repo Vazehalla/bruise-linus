@@ -6,6 +6,7 @@ class_name State_Dash extends State
 @export var dash_scale_x : float = 1.6
 @export var dash_scale_y : float = 0.7
 @export var dash_tilt_degrees : float = 28.0
+@export var effect_offset : float = 16.0
 
 var _timer : float = 0.0
 var _cooldown_until : float = 0.0
@@ -24,7 +25,8 @@ func Enter() -> void:
 	_dash_direction = player.direction if player.direction != Vector2.ZERO else fallback
 	_timer = 0.0
 	_flip = player.FacingSign()
-	dash_effect.flip_h = _dash_direction.x >= 0.0
+	dash_effect.position = -_dash_direction * effect_offset
+	dash_effect.rotation = atan2(-_dash_direction.y, -_dash_direction.x)
 	dash_effect.visible = true
 	player.sprite.scale = Vector2(_flip * dash_scale_x, dash_scale_y)
 	player.sprite.rotation = _dash_direction.x * deg_to_rad(dash_tilt_degrees)
@@ -34,6 +36,8 @@ func Exit() -> void:
 	player.dash_ended.emit()
 	player.is_invincible = false
 	dash_effect.visible = false
+	dash_effect.position = Vector2.ZERO
+	dash_effect.rotation = 0.0
 	player.sprite.scale = Vector2(_flip, 1.0)
 	player.sprite.rotation = 0.0
 	_cooldown_until = Time.get_ticks_msec() / 1000.0 + dash_cooldown
