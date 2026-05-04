@@ -56,6 +56,44 @@ func set_target(player : Player) -> void:
 		player.state_changed.connect(_on_state_changed)
 
 
+func _physics_process(delta : float) -> void:
+	if not _target:
+		return
+	_smooth_pos = _solve_deadzone(_target.global_position, delta)
+	if world_bounds_enabled:
+		_smooth_pos = _apply_bounds(_smooth_pos)
+	global_position = _smooth_pos
+
+
+func _solve_deadzone(target_pos : Vector2, delta : float) -> Vector2:
+	var half_w : float = deadzone_width * 0.5
+	var half_h : float = deadzone_height * 0.5
+	var diff : Vector2 = target_pos - _smooth_pos
+	var desired : Vector2 = _smooth_pos
+
+	if diff.x > half_w:
+		desired.x = target_pos.x - half_w
+	elif diff.x < -half_w:
+		desired.x = target_pos.x + half_w
+
+	if diff.y > half_h:
+		desired.y = target_pos.y - half_h
+	elif diff.y < -half_h:
+		desired.y = target_pos.y + half_h
+
+	return Vector2(
+		lerpf(_smooth_pos.x, desired.x, follow_speed_x * delta),
+		lerpf(_smooth_pos.y, desired.y, follow_speed_y * delta)
+	)
+
+
+func _apply_bounds(pos : Vector2) -> Vector2:
+	return Vector2(
+		clampf(pos.x, world_bounds.position.x, world_bounds.end.x),
+		clampf(pos.y, world_bounds.position.y, world_bounds.end.y)
+	)
+
+
 func set_colossus_mode(_active : bool) -> void:
 	pass
 
