@@ -1,0 +1,4 @@
+disable:
+  - function-name
+  - function-argument-name
+  - class-definitions-order

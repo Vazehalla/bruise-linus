@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://7rksxinscnwf"]
 
 [ext_resource type="Texture2D" uid="uid://q36ctoajl6r0" path="res://Player/Sprites/PlayerSprite02.png" id="1_gwnis"]
+[ext_resource type="Script" uid="uid://cxm6h76q3p4su" path="res://Player/Scripts/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://bmhrj8our3fmm" path="res://Player/Scripts/player_state_machine.gd" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://dofpsdbm3xi38" path="res://Player/Sprites/AttackSprite01 (1).png" id="2_fhl08"]
 [ext_resource type="Script" uid="uid://cd1jifka3dqlq" path="res://Player/Scripts/state_idle.gd" id="3_btcbx"]
 [ext_resource type="Texture2D" uid="uid://bpjpdfokk0tve" path="res://Player/Sprites/Shadow.png" id="3_od3ui"]
 [ext_resource type="Script" uid="uid://cwb63kkxr7kka" path="res://Player/Scripts/state_walk.gd" id="4_gwnis"]
 [ext_resource type="Script" uid="uid://dmjv7otafqriv" path="res://Player/Scripts/state_attack.gd" id="5_k53q1"]
+[ext_resource type="Script" path="res://Player/Scripts/state_dash.gd" id="6_dash"]
+[ext_resource type="Script" path="res://Player/Scripts/state_jump.gd" id="7_jump"]
 [ext_resource type="AudioStream" uid="uid://b0a7nxiqny1b1" path="res://Player/Audio/SwordSwoosh.wav" id="7_vtle1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
@@ -423,6 +426,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=155078557]
+script = ExtResource("1_player")
 collision_mask = 16
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
@@ -466,6 +470,12 @@ script = ExtResource("4_gwnis")
 [node name="Attack" type="Node" parent="StateMachine" unique_id=725474110]
 script = ExtResource("5_k53q1")
 attack_sound = ExtResource("7_vtle1")
+
+[node name="Dash" type="Node" parent="StateMachine" unique_id=1001]
+script = ExtResource("6_dash")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1002]
+script = ExtResource("7_jump")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=804053381]
 
