@@ -19,7 +19,7 @@ var is_invincible : bool = false
 @onready var shadow : Sprite2D = $Sprite2D/ShadowSprite
 @onready var state_machine : PlayerStateMachine = $StateMachine
 
-signal DirectionChanged( new_direction : Vector2 )
+signal direction_changed( new_direction : Vector2 )
 
 func _ready() -> void:
 	state_machine.Initialize(self)
@@ -48,7 +48,7 @@ func SetDirection() -> bool:
 
 	cardinal_direction = new_direction
 	move_octant = new_octant
-	DirectionChanged.emit( new_direction )
+	direction_changed.emit( new_direction )
 	return true
 
 

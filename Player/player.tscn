@@ -11,8 +11,11 @@
 [ext_resource type="Script" uid="uid://be2rrc8cn5hxm" path="res://Player/Scripts/state_dash.gd" id="6_dash"]
 [ext_resource type="Script" uid="uid://cjifxf5ofrc2g" path="res://Player/Scripts/state_jump.gd" id="7_jump"]
 [ext_resource type="AudioStream" uid="uid://b0a7nxiqny1b1" path="res://Player/Audio/SwordSwoosh.wav" id="7_vtle1"]
+[ext_resource type="Script" path="res://Player/Scripts/camera_controller.gd" id="8_camera"]
+[ext_resource type="Texture2D" uid="uid://c3fpst5w4dtup" path="res://Player/Sprites/void-dash-effect1-sheet.png" id="9_dash_fx"]
 [ext_resource type="PackedScene" uid="uid://c2t7fy26uvsti" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="12_5htga"]
 [ext_resource type="Script" uid="uid://c66bh431bdes5" path="res://Player/Scripts/player_interactions_host.gd" id="12_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://25ef8rww0dh3" path="res://Player/Sprites/attack-hit-animation1-sheet.png" id="13_hit_fx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
 
@@ -439,6 +442,16 @@ script = ExtResource("1_player")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1296691259]
 shape = SubResource("CircleShape2D_l8h54")
 
+[node name="DashEffectSprite" type="Sprite2D" parent="." unique_id=1003]
+visible = false
+texture = ExtResource("9_dash_fx")
+hframes = 4
+
+[node name="OnHitEffectSprite" type="Sprite2D" parent="." unique_id=1004]
+visible = false
+texture = ExtResource("13_hit_fx")
+hframes = 4
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1601881532]
 position = Vector2(0, -20)
 texture = ExtResource("1_gwnis")
@@ -483,6 +496,23 @@ script = ExtResource("6_dash")
 script = ExtResource("7_jump")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=804053381]
+zoom = Vector2(0.860, 0.774)
+script = ExtResource("8_camera")
+follow_speed_x = 12.0
+follow_speed_y = 12.0
+deadzone_width = 16.0
+deadzone_height = 10.0
+look_ahead_distance = 14.0
+look_ahead_recover_speed = 10.0
+base_zoom = Vector2(0.860, 0.774)
+colossus_zoom = Vector2(0.603, 0.543)
+zoom_transition_speed = 3.5
+shake_default_amplitude = 2.0
+shake_default_duration = 0.1
+shake_decay_rate = 25.0
+max_shake_amplitude = 4.0
+world_bounds_enabled = false
+world_bounds = Rect2(-240, -135, 480, 270)
 
 [node name="Audio" type="Node2D" parent="." unique_id=62314292]
 

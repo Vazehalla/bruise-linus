@@ -5,8 +5,7 @@ class_name PlayerInteractionsHost extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player.DirectionChanged.connect( UpdateDirection )
-	pass # Replace with function body.
+	player.direction_changed.connect( UpdateDirection )
 
 
 func UpdateDirection( new_direction : Vector2 ) -> void:
@@ -21,4 +20,3 @@ func UpdateDirection( new_direction : Vector2 ) -> void:
 			rotation_degrees = -90
 		_:
 			rotation_degrees = 0
-	pass
