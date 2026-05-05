@@ -25,9 +25,9 @@ func Process( _delta: float ) -> State:
 	if player.direction == Vector2.ZERO:
 		return idle
 	player.velocity = player.direction * move_speed
-	if player.SetDirection():
+	if player.UpdateDirection():
 		player.UpdateAnimation("walk")
-	ApplyDiagonalVisuals(player.move_octant)
+	ApplyDiagonalVisuals(player.facing)
 	return null
 
 
