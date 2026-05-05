@@ -28,7 +28,7 @@ func Enter() -> void:
 	player.dash_started.emit()
 	player.state_changed.emit("dash")
 	player.is_invincible = true
-	var fallback := Vector2(player.cardinal_direction.x, player.cardinal_direction.y).normalized()
+	var fallback := Vector2(player.facing_cardinal.x, player.facing_cardinal.y).normalized()
 	_dash_direction = player.direction if player.direction != Vector2.ZERO else fallback
 	_back_direction = -_dash_direction
 	if _back_direction == Vector2.ZERO:

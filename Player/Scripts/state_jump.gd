@@ -49,7 +49,7 @@ func Process( _delta : float ) -> State:
 
 	if player.direction != Vector2.ZERO:
 		player.velocity = player.direction * jump_air_speed
-		player.SetDirection()
+		player.UpdateDirection()
 	else:
 		player.velocity = Vector2.ZERO
 
